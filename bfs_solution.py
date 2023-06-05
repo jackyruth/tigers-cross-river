@@ -1,6 +1,11 @@
 # Implement Depth First Search Algorithm for the River Crossing Riddle
+"""
+Game Setup: Left Shore -> River -> Right Shore
+The left shore alone uniquely identifies the state of the game
+"""
 from enum import Enum
 import copy
+
 class c(Enum):
     tA = 1
     tB = 2
@@ -10,24 +15,8 @@ class c(Enum):
     cC = 6
     boat = 7
 
-## Node Definition
-"""
-Game Setup: Left Shore -> River -> Right Shore
-The left shore alone uniquely identifies the state of the game
-"""
 chars = [x for x in c]
-
-
-def visit(v):
-    for i in c:
-        if i in v:
-            print(i.name, end=" ")
-        else:
-            print(len(i.name)*" ", end=" ")
-    print("\n")
-
-def encode(v):
-    return tuple(set(v))
+rowers_list = [c.tA, c.tB, c.tC, c.cA]
 
 def valid_bank(bank):
     bank_list = []
@@ -64,7 +53,18 @@ def valid_bank(bank):
 
     return True
 
-rowers_list = [c.tA, c.tB, c.tC, c.cA]
+### Algorithm ###
+def visit(v):
+    for i in c:
+        if i in v:
+            print(i.name, end=" ")
+        else:
+            print(len(i.name)*" ", end=" ")
+    print("\n")
+
+def encode(v):
+    return tuple(set(v))
+
 def Game(v):
     """
     Input: An ordered tuple 'v' showing who is on the left shore
