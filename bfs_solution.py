@@ -12,11 +12,10 @@ class c(Enum):
     tC = 3
     cA = 4
     cB = 5
-    cC = 6
-    boat = 7
+    boat = 6
 
 chars = [x for x in c]
-rowers_list = [c.tA, c.tB, c.tC, c.cA]
+rowers_list = [c.tA, c.tB, c.tC]
 
 def valid_bank(bank):
     bank_list = []
@@ -31,8 +30,6 @@ def valid_bank(bank):
             bank_list.append("cub1")
         elif i == c.cB:
             bank_list.append("cub2")
-        elif i == c.cC:
-            bank_list.append("cub3")
         elif i == c.boat:
             bank_list.append("boat")
         else:
