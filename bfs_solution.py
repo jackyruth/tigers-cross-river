@@ -1,35 +1,68 @@
-# Implement Depth First Search Algorithm for the River Crossing Riddle
+# Guaranteed Optimal Solution to the River Crossing Riddle
 """
-Game Setup: Left Shore -> River -> Right Shore
-The left shore alone uniquely identifies the state of the game
+The River Crossing Riddle
+=========================
+There are three tigers and three cubs.
+Each tiger is a parent to exactly one of the cubs.
+
+The tigers and cubs are trying to cross a river.
+There is a boat next to the shore capable of carrying at most two animals at a time.
+All three tigers know how to row the boat, but only one of the cubs knows, the other two cubs can only be passengers.
+
+The tigers are merciless and will eat any cub that is not with its parent.
+For example, 'tiger A' will eat 'cub b' if 'tiger B' is on the other side of the river.
+
+How does the entire group cross the river safely?
 """
+
 from enum import Enum
 import copy
 
+#======== Specific Game Rules ========#
+# Starting Printout
+def print_start():
+    str1 = " River Crossing Riddle "
+    eqlen = 15
+    print("\n\n\n")
+    print(eqlen*"="+str1+eqlen*"=")
+    print()
+    print("\t\tThree tigers: A, B, C")
+    print("\t\tThree cubs: a, b, c")
+    print("\t\tBoat rowers: A, B, C, a")
+    print()
+    print((eqlen+len(str1)+eqlen)*"=")
+    print()
+
+# Define the characters
 class c(Enum):
-    tA = 1
-    tB = 2
-    tC = 3
-    cA = 4
-    cB = 5
-    boat = 6
+    A = 1
+    a = 4
+    B = 2
+    b = 5
+    C = 3
+    c = 6
+    boat = 7
 
+# Initialize the characters and the rowers
 chars = [x for x in c]
-rowers_list = [c.tA, c.tB, c.tC]
+rowers_list = [c.A, c.B, c.C, c.a]
 
+# Check if the bank is valid
 def valid_bank(bank):
     bank_list = []
     for i in bank:
-        if i == c.tA:
+        if i == c.A:
             bank_list.append("tiger1")
-        elif i == c.tB:
+        elif i == c.B:
             bank_list.append("tiger2")
-        elif i == c.tC:
+        elif i == c.C:
             bank_list.append("tiger3")
-        elif i == c.cA:
+        elif i == c.a:
             bank_list.append("cub1")
-        elif i == c.cB:
+        elif i == c.b:
             bank_list.append("cub2")
+        elif i == c.c:
+            bank_list.append("cub3")
         elif i == c.boat:
             bank_list.append("boat")
         else:
@@ -50,18 +83,33 @@ def valid_bank(bank):
 
     return True
 
-### Algorithm ###
-def visit(v):
-    for i in c:
-        if i in v:
-            print(i.name, end=" ")
-        else:
-            print(len(i.name)*" ", end=" ")
-    print("\n")
+#============================================================#
+#=========== The Solution (Do not change) ===================#
+#============================================================#
 
+#=== Helper Functions ===#
+# Print the visited vertex
+def visit(lb,rb):
+    lb_padded = []
+    rb_padded = []
+    for i in c:
+        if i in lb:
+            lb_padded.append(i.name)
+        else:
+            lb_padded.append(" ")
+        if i in rb:
+            rb_padded.append(i.name)
+        else:
+            rb_padded.append(" ")
+    
+    for i in range(len(c)):
+        print("\t\t"+lb_padded[i] + "\t | \t" + rb_padded[i])
+
+# Produce a unique encoding for the vertex
 def encode(v):
     return tuple(set(v))
 
+#====== The Game ======#
 def Game(v):
     """
     Input: An ordered tuple 'v' showing who is on the left shore
@@ -117,11 +165,11 @@ def Game(v):
 
     return valid_moves
 
-
-def BFS(Game, v):
+#=== Breadth First Search ===#
+def breadth_first_search(Game, v):
     queue  = [encode(v)] 
     marked = {}
-    prev = {}
+    edges = {}
     while len(queue) > 0:
         v = queue.pop(0)
         if v not in marked.keys():
@@ -130,32 +178,40 @@ def BFS(Game, v):
                 y = encode(w)
                 if y not in marked.keys():
                     queue.append(y)
-                    prev[y] = v
-    return prev
+                    edges[y] = v
+    return edges
 
-def reconstructPath(s, e, prev):
+#== Get Shortest Path ==#
+def get_shortest_path(s, e, edges):
     path = []
 
     node = encode(e)
     while node != encode(s):
         path.append(node)
-        node = prev[node]
+        node = edges[node]
     
     path.append(node)
     path.reverse()
     return path
 
-
+#========= Main =========#
 if __name__ == "__main__":
-    prev = BFS(Game, chars)
-    path = reconstructPath(chars, [], prev)
-    print(25*"="+"START"+25*"=")
+    edges = breadth_first_search(Game, chars)
+    path = get_shortest_path(chars, [], edges)
+
+    print_start()
+    print("left shore\t\triver\t\tright shore")
     n = 0
-    for i in path:
-        n+=1
-        ls = list(i)
-        rs = [i for i in c if i not in ls]
-        print("Step: " + str(n))
-        visit(ls)
-        visit(rs)
-        print(50*"-")
+    if(path[0] != encode(chars)):
+        print("No solution found!")
+    else:
+        for i in path:
+            n+=1
+            ls = list(i)
+            rs = [i for i in c if i not in ls]
+            print()
+            visit(ls,rs)
+            if len(ls) > 0:
+                print(5*"-"+"Step: " + str(n)+40*"-")
+            else:
+                print("\n\nAll tigers & their cubs have crossed the river safely!")
