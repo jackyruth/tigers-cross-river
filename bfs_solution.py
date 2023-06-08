@@ -89,7 +89,7 @@ def valid_bank(bank):
 
 #=== Helper Functions ===#
 # Print the visited vertex
-def visit(lb,rb,step,animate=True):
+def visit(lb,rb,step,pause,animate=True):
     lb_padded = []
     rb_padded = []
     for i in c:
@@ -102,16 +102,19 @@ def visit(lb,rb,step,animate=True):
         else:
             rb_padded.append(" ")
 
-
-    stp_cnt = 5*"-"+"Step: " + str(step)+40*"-"
+    stp_cnt = 5*"-"+"Step: " + str(step-1)+40*"-"
     print(stp_cnt, flush=True)
     for i in range(len(c)):
         msg = "\t\t"+lb_padded[i] + "\t | \t" + rb_padded[i]
         print(msg, flush=True)
+    
 
     if len(lb) > 0:
         if animate:
             print(3*"\n", flush=True)
+            if pause and animate:
+                sleep(3)
+                pause=False
             sleep(2)
             print(4*"\033[A", end='', flush=True)
             for i in range(len(c)):
@@ -224,8 +227,11 @@ if __name__ == "__main__":
     if(path[0] != encode(chars)):
         print("No solution found!")
     else:
+        pause = True
         for i in path:
             n+=1
             ls = list(i)
             rs = [i for i in c if i not in ls]
-            visit(ls,rs,n,animate=True)
+            visit(ls,rs,n,pause,animate=True)
+            pause = False
+        
