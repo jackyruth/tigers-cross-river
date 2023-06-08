@@ -27,8 +27,8 @@ def print_start():
     print(eqlen*"="+str1+eqlen*"=")
     print()
     print("\t\tThree tigers: A, B, C")
-    print("\t\tThree cubs: a, b, c")
-    print("\t\tBoat rowers: A, B, C, a")
+    print("\t\tTwo cubs: a, b")
+    print("\t\tBoat rowers: A, B, C")
     print()
     print((eqlen+len(str1)+eqlen)*"=")
     print()
@@ -40,12 +40,11 @@ class c(Enum):
     B = 2
     b = 5
     C = 3
-    c = 6
-    boat = 7
+    boat = 6
 
 # Initialize the characters and the rowers
 chars = [x for x in c]
-rowers_list = [c.A, c.B, c.C, c.a]
+rowers_list = [c.A, c.B, c.C]
 
 # Check if the bank is valid
 def valid_bank(bank):
@@ -61,8 +60,6 @@ def valid_bank(bank):
             bank_list.append("cub1")
         elif i == c.b:
             bank_list.append("cub2")
-        elif i == c.c:
-            bank_list.append("cub3")
         elif i == c.boat:
             bank_list.append("boat")
         else:
