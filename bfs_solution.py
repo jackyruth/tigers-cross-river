@@ -14,7 +14,7 @@ For example, 'tiger A' will eat 'cub b' if 'tiger B' is on the other side of the
 
 How does the entire group cross the river safely?
 """
-
+from time import sleep
 from enum import Enum
 import copy
 
@@ -89,7 +89,7 @@ def valid_bank(bank):
 
 #=== Helper Functions ===#
 # Print the visited vertex
-def visit(lb,rb):
+def visit(lb,rb,step,animate=True):
     lb_padded = []
     rb_padded = []
     for i in c:
@@ -101,9 +101,28 @@ def visit(lb,rb):
             rb_padded.append(i.name)
         else:
             rb_padded.append(" ")
-    
+
+
+    stp_cnt = 5*"-"+"Step: " + str(step)+40*"-"
+    print(stp_cnt, flush=True)
     for i in range(len(c)):
-        print("\t\t"+lb_padded[i] + "\t | \t" + rb_padded[i])
+        msg = "\t\t"+lb_padded[i] + "\t | \t" + rb_padded[i]
+        print(msg, flush=True)
+
+    if len(lb) > 0:
+        if animate:
+            print(3*"\n", flush=True)
+            sleep(2)
+            print(4*"\033[A", end='', flush=True)
+            for i in range(len(c)):
+                idx=len(c)-i-1
+                msg = "\t\t"+lb_padded[idx] + "\t | \t" + rb_padded[idx]
+                print("\033[F"+3*len(msg)*" ", flush=True)
+                print("\033[A", end='', flush=True)
+            print("\033[F"+len(stp_cnt)*" ", flush=True)
+            print("\033[A", end='', flush=True)
+    else:
+        print("\n\nAll tigers & their cubs have crossed the river safely!")
 
 # Produce a unique encoding for the vertex
 def encode(v):
@@ -209,9 +228,4 @@ if __name__ == "__main__":
             n+=1
             ls = list(i)
             rs = [i for i in c if i not in ls]
-            print()
-            visit(ls,rs)
-            if len(ls) > 0:
-                print(5*"-"+"Step: " + str(n)+40*"-")
-            else:
-                print("\n\nAll tigers & their cubs have crossed the river safely!")
+            visit(ls,rs,n,animate=True)
