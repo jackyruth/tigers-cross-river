@@ -92,7 +92,7 @@ In fact, once we confidently progress in our search after step 8, the solution b
 
 When looking for a variant of the riddle, we must hit the same psychological barrier in order to give us the same satisfaction for persevering through the uncertainty.
 I believe I found the simpler variant of the riddle I have been looking for.
-$$
+```math
 \begin{align}
 &\textbf{The River Crossing Riddle (Simpler Variant)} \\
 \\
@@ -108,7 +108,7 @@ $$
 \\
 &\text{How does the entire group cross the river safely?}\\
 \end{align}
-$$
+```
 The solution to this simpler variant involves 7 steps as opposed to the 13 steps required in the original version.
 
 <img src="3t2c.gif" style="zoom:70%;" />
