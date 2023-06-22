@@ -9,7 +9,7 @@ I tried to show them some pictures, but age hasn't been kind to their eyes.
 Still wishing to communicate, I decided to demonstrate my abilities as a programmer by cracking one of the riddles they used to give me as a kid.
 
 Here it is:
-$$
+```math
 \begin{align}
 &\textbf{The River Crossing Riddle} \\
 \\
@@ -25,7 +25,7 @@ $$
 \\
 &\text{How does the entire group cross the river safely?}\\
 \end{align}
-$$
+```
 
 
 For whatever reason, this particular riddle captured my attention. 
@@ -54,7 +54,7 @@ That is pretty much all there is to it
 
 I encourage you to try the riddle for yourself first, then use the following gif to check that you got the right solution!
 
-<img src="/home/jacky/Downloads/franklin/grandpa-riddle/3t3c.gif" style="zoom:70%;" />
+<img src="3t3c.gif" style="zoom:70%;" />
 
 ## Quest for a Simpler Variant
 To further demonstrate my powers to my unsuspecting grandparents, I searched the space of all possible riddles to find different variants.
@@ -75,7 +75,7 @@ After investigating further, I believe I found the culprit, and it has more to d
 
 Take a look at step 8 in the solution.
 
-<img src="/home/jacky/Downloads/franklin/grandpa-riddle/3t3c-barrier.png" style="zoom:70%;" />
+<img src="3t3c-barrier.png" style="zoom:70%;" />
 
 If you squint a little, the state of the game at step 8 looks like a state you can reach immediately in step 1.
 Manually running the search algorithm is difficult because you have to keep track of all the states you've visited before.
@@ -111,8 +111,8 @@ $$
 $$
 The solution to this simpler variant involves 7 steps as opposed to the 13 steps required in the original version.
 
-<img src="/home/jacky/Downloads/franklin/grandpa-riddle/3t2c.gif" style="zoom:70%;" />
+<img src="3t2c.gif" style="zoom:70%;" />
 
 The psychological barrier arises in step 4, and I can confirm that it is indeed a barrier as my grandpa just couldn't get past it =)
 
-<img src="/home/jacky/Downloads/franklin/grandpa-riddle/3t2c-barrier.png" style="zoom:70%;" />
+<img src="3t2c-barrier.png" style="zoom:70%;" />
