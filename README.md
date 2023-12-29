@@ -61,7 +61,7 @@ To further demonstrate my powers to my unsuspecting grandparents, I searched the
 I wanted the variant I present to my grandparents to satisfy two conditions.
 
 1. A simpler version requiring less steps in the solution
-2. Still gave the same sense of cleverness and satisfaction once solved
+1. Still gave the same sense of cleverness and satisfaction once solved
 
 The version I was given was too difficult, it involved running a brute-force algorithm by hand for 13 steps.
 Indeed, in my whole family, only I was foolish enough to give up my time to find the solution, which seems predictive of the profession I am in now.
